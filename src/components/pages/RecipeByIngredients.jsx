@@ -1,9 +1,10 @@
 import {Button, Container, Form} from "react-bootstrap";
-import {useCallback, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import useSpoonacularFoodService from "../../services/SpoonacularFood.service";
 import RecipesList from "../recipesList/RecipesList";
 import Spinner from "../spinner/Spinner";
 import IngredientsInput from "../ingredientsInput/IngredientsInput";
+import {Helmet} from "react-helmet";
 
 const RecipeByIngredients = () => {
     const [selected, setSelected] = useState([])
@@ -49,32 +50,39 @@ const RecipeByIngredients = () => {
     const spinner = loading ? <Spinner /> : null
 
     return (
-        <Container className={'mt-4'}>
-            <div className={'offset-md-1 col-md-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6'}>
-                <div className={'h5'}>
-                    Find recipe by ingredients
+        <>
+            <Helmet>
+                <title>Recipes by ingredient</title>
+                <meta name="description" content="Find recipes by ingredient" />
+            </Helmet>
+
+            <Container className={'mt-4'}>
+                <div className={'offset-md-1 col-md-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6'}>
+                    <div className={'h5'}>
+                        Find recipe by ingredients
+                    </div>
+                    <Form className={'mt-3'} onSubmit={onSubmit}>
+                        <IngredientsInput select={{selected, setSelected}} />
+                    </Form>
                 </div>
-                <Form className={'mt-3'} onSubmit={onSubmit}>
-                    <IngredientsInput select={{selected, setSelected}} />
-                </Form>
-            </div>
 
-            <div className={'mt-4 offset-md-1 col-md-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6'}>
-                <RecipesList data={recipes}/>
-                {spinner}
-            </div>
+                <div className={'mt-4 offset-md-1 col-md-10 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6'}>
+                    <RecipesList data={recipes}/>
+                    {spinner}
+                </div>
 
-            <Button
-                variant="secondary"
-                className={'mt-4 mx-auto'}
-                style={{display: recipes.length === 0 || itemsEnded ? 'none' : 'block'}}
-                disabled={newItemsLoading}
-                onClick={onMore}
-            >
-                More
-            </Button>
+                <Button
+                    variant="secondary"
+                    className={'mt-4 mx-auto'}
+                    style={{display: recipes.length === 0 || itemsEnded ? 'none' : 'block'}}
+                    disabled={newItemsLoading}
+                    onClick={onMore}
+                >
+                    More
+                </Button>
 
-        </Container>
+            </Container>
+        </>
     )
 }
 

@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Spinner from "../spinner/Spinner";
 import RecipeShortInfo from "../recipeShortInfo/RecipeShortInfo";
+import {Helmet} from "react-helmet";
 
 const Recipe = () => {
     const [data, setData] = useState(null)
@@ -31,6 +32,11 @@ const View = (props) => {
 
     return (
         <>
+            <Helmet>
+                <title>{otherData.title}</title>
+                <meta name="description" content="Recipe information" />
+            </Helmet>
+
             <RecipeShortInfo data={otherData} />
 
             <div className={'mt-4 col-sm-10 col-md-8 col-lg-6'}>

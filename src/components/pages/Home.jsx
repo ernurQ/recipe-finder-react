@@ -3,6 +3,7 @@ import useSpoonacularFoodService from "../../services/SpoonacularFood.service";
 import RecipesList from "../recipesList/RecipesList";
 import {useEffect, useState} from "react";
 import Spinner from "../spinner/Spinner";
+import {Helmet} from "react-helmet";
 
 const Home = () => {
     const [recipes, setRecipes] = useState([]);
@@ -16,9 +17,15 @@ const Home = () => {
     const content = loading ? <Spinner /> : <RecipesList data={recipes} />
 
     return (
-        <Container className={'mt-4'}>
-            {content}
-        </Container>
+        <>
+            <Helmet>
+                <title>Recipe finder</title>
+                <meta name="description" content="Random recipes"/>
+            </Helmet>
+            <Container className={'mt-4'}>
+                {content}
+            </Container>
+        </>
     )
 }
 
