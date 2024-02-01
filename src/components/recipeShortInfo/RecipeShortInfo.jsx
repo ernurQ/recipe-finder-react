@@ -6,12 +6,17 @@ const RecipeShortInfo = (props) => {
 
     return (
         <Card className={'flex-md-row'}>
-            <Image
-                rounded
-                className={'object-fit-cover col-md-5 col-xl-4 col-xxl-3'}
-                src={image}
-                alt={title}
-            />
+            <Link
+                to={'/recipe/' + id}
+                className={'d-block p-2 col-md-5 col-xl-4 col-xxl-3'}
+            >
+                <Image
+                    rounded
+                    className={'object-fit-cover w-100'}
+                    src={image}
+                    alt={title}
+                />
+            </Link>
             <Card.Body>
                 <Link
                     className={'card-title h5 text-decoration-none'}
