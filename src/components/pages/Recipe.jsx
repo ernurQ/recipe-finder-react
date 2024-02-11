@@ -14,7 +14,7 @@ const Recipe = () => {
     useEffect(() => {
         getRecipeById(id)
             .then(setData)
-    }, [])
+    }, [id])
 
     const spinner = loading ? <Spinner /> : null
     const content = data ? <View data={data}/> : null
